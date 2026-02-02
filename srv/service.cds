@@ -4,8 +4,12 @@ service BookstoreService {
 
     entity Books      as projection on db.Books
         actions {
+            @(Common.SideEffects : {TargetProperties: ['stock']})
             action addStock();
+            
             action changePublishDate(newDate: Date);
+            // @(Common.SideEffects : {TargetProperties: ['status_code']})
+            @(Common.SideEffects : {TargetProperties: ['status_code']})
             action changeStatus( @(Common: {
                                      ValueListWithFixedValues: true,
                                      Label                   : 'New status',

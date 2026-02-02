@@ -39,6 +39,11 @@ annotate service.Books with @(
                 Label : 'Currency',
                 Value : currency_code,
             },
+            {
+                $Type : 'UI.DataField',
+                Value : stock,
+                Label : 'Stock',
+            },
         ],
     },
     UI.Facets : [
