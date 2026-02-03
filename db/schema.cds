@@ -57,6 +57,7 @@ entity Authors : cuid, managed {
                             @Core.AcceptableMediaTypes : ['application/pdf']
                            @Core.ContentDisposition.Filename: fileName;
     attachments: Composition of many Attachments;
+    virtual bookCount : Integer;
     books    : Association to many Books
                    on books.author = $self;
 }

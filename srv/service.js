@@ -51,6 +51,18 @@ module.exports = class BookstoreService extends cds.ApplicationService {
       }
     })
 
+    this.after('READ', Authors, async (authors, req) => {
+      const ids = authors.map(author => author.ID)
+      const bookCounts = await SELECT.from(Books)
+        .columns('author_ID', { func: 'count' })
+        .where({ author_ID: { in: ids } })
+        .groupBy('author_ID');
+      for (const author of authors) {
+        const bookCount = bookCounts.find(bookCount => bookCount.author_ID = author.ID)
+        author.bookCount = bookCount.count
+      }
+    })
+
 
     return super.init()
   }
